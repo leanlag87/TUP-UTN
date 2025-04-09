@@ -1,0 +1,81 @@
+.proyectos {
+  width: 80%;
+  padding: 1rem;
+  background: var(--fondo-proyectos);
+  filter: drop-shadow(1px 1px 5px azure);
+}
+
+/* Contenedor general que engloba a los proyectos*/
+.galeria-proyectos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Como es el contenedor del proyecto en general*/
+.proyecto {
+  background-color: rgb(17, 19, 19); /*color de fondo de la tarjeta */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  width: calc(
+    33% - 40%
+  ); /*Ajusta el ancho segun la cantidad de proyectos a mostrar*/
+  box-shadow: 0 2px 5px rgb(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Img del proyecto*/
+.proyecto img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* titulo del proyecto*/
+.proyecto h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+/* Descripcion del proyecto*/
+.proyecto p {
+  margin: 10px 0;
+}
+
+/* Btn enlaces*/
+.proyecto a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: rgba(22, 51, 219, 0.411);
+  color: white;
+  border-radius: 5px;
+}
+
+/* Btn  de los proyectos*/
+.proyecto a:hover {
+  background-color: rgb(0, 225, 255);
+}
+
+/*Media queries para hacerlo responsivo mobile*/
+@media (max-width: 767px) {
+  .proyecto {
+    width: calc(100% - 40px);
+  }
+}
+
+/*Media queries para hacerlo responsivo tablet*/
+@media (min-width: 768px) and (max-width: 1023px) {
+  .proyecto {
+    width: calc(50% - 40px);
+  }
+}
+
+/*Media queries para hacerlo responsivo desktop*/
+@media (min-width: 1024px) {
+  .proyecto {
+    width: calc(33% - 40px);
+  }
+}

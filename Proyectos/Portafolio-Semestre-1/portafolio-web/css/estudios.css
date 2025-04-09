@@ -1,0 +1,60 @@
+.estudios {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  color: azure;
+}
+
+.container-estudios {
+  width: 1000%;
+  padding: 2rem;
+  margin-top: 5rem;
+  line-height: 2.5rem;
+  font-size: large;
+  margin: 8rem;
+}
+
+.logo-utn {
+  border-radius: 50%;
+  filter: drop-shadow(1px 1px 5px azure);
+}
+
+/* Celular (Pantallas pequeñas hasta 767px) */
+@media (max-width: 767px) {
+  .estudios {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: small;
+  }
+  .container-estudios {
+    width: 100%;
+    margin: 0rem;
+  }
+}
+
+/* tamaño Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .estudios {
+    width: 75%;
+  }
+  .container-estudios-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+}
+
+/* tamaño Desktop */
+@media (min-width: 1024px) {
+  .estudios {
+    width: 75%;
+  }
+  .container-estudios-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+}

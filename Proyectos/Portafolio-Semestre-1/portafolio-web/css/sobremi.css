@@ -1,0 +1,47 @@
+.aboutme {
+  display: flex;
+  justify-content: center;
+}
+
+.cantainer-aboutme {
+  display: flex;
+  width: 50%;
+  padding: 2rem;
+  margin-top: 5rem;
+  line-height: 2.5rem;
+  font-size: large;
+  color: rgb(186, 182, 147);
+  margin: 8rem;
+  gap: 5rem;
+  align-items: center;
+}
+
+.img-perfil {
+  border-radius: 50%;
+}
+
+/* Celular (Pantallas pequeñas hasta 767px) */
+@media (max-width: 767px) {
+  .cantainer-aboutme {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    line-height: 2.5rem;
+    font-size: small;
+    flex-direction: column;
+  }
+}
+
+/* tamaño Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cantainer-aboutme {
+    width: 75%;
+  }
+}
+
+/* tamaño Desktop */
+@media (min-width: 1024px) {
+  .cantainer-aboutme {
+    width: 100%;
+  }
+}
