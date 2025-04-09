@@ -1,0 +1,51 @@
+//Ampliando el uso de var, let y const
+/*
+Con var se puede reasignar en cualquier momento 
+este forma parte del ambito global
+Un error es que se sobreescriba 
+*/
+
+var nombre = "Leandro";
+nombre = "Agustin";
+console.log(nombre);
+
+function saludar() {
+  var nombre = "Ariel";
+  console.log(nombre);
+}
+
+//console.log(nombre); //Aqui no lee el dato en la funcion
+
+if (true) {
+  var edad = 37;
+  console.log(edad);
+}
+//console.log(edad); //En la funcion funciono correctamente, en el if fallo
+
+/*
+let: esta puede ser reasignada en cualquier momento 
+la diferencia es que su ambito es de bloque
+solo disponible dentro de un bloque de llaves
+o dentro de una funcion 
+*/
+
+function saludar2() {
+  let nombre2 = "Leandro";
+  console.log(nombre2);
+}
+//console.log(nombre2);
+
+if (true) {
+  let edad2 = 35;
+  console.log(edad2);
+}
+//console.log(edad2);
+
+/*
+const se usa para valores constantes que no se pueden reasignar
+ */
+
+const fechaNacimiento = 1990;
+console.log(fechaNacimiento);
+//fechaNacimiento = 1987; //Esto genera un error ya q no se puede reasignar
+//console.log(fechaNacimiento);
