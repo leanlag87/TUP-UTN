@@ -28,4 +28,4 @@ Este archivo contiene información adicional sobre la clase 03 de Java.
 ## Notas
 
 - Recuerda seguir las buenas prácticas de codificación.
-- Si tienes dudas, consulta con el profesor o revisa los recursos compartidos.
+- Si tienes dudas, consulta con la documentación oficial de Java (https://docs.oracle.com/javase/8/docs/) o revisa los recursos compartidos.
