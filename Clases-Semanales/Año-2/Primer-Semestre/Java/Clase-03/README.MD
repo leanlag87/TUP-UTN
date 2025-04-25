@@ -35,6 +35,14 @@ Este archivo contiene información adicional sobre la clase 03 de Java.
 9. Investigar sobre el uso de excepciones en Java para manejar errores y situaciones inesperadas.
 10. Crear un programa que utilice excepciones personalizadas para manejar errores específicos en la lógica de negocio.
 
+## Imagenes de Ejemplo de la clase
+
+![Ejemplo 1](assets/Snapshot_76.png)  
+![Ejemplo 2](assets/Snapshot_77.png)  
+![Ejemplo 3](assets/Snapshot_78.png)  
+![Ejemplo 4](assets/Snapshot_79.png)
+![Ejemplo 5](assets/Snapshot_80.png)
+
 ## Notas
 
 - Es importante seguir las buenas prácticas.
