@@ -2,7 +2,7 @@
 
 Este repositorio contiene el material correspondiente a la **Clase 04** de de Python, donde se aborda la integración de Python con bases de datos PostgreSQL.
 
-![Python y PostgreSQL](./assets/python_postgresql.png)
+![Python y PostgreSQL](./assets/Py.jpg)
 ![Python y PostgreSQL](./assets/capturaDB.png)
 
 ## Contenido
