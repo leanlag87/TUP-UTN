@@ -1,0 +1,47 @@
+11:26:07 AM:DEBUG [Persona.py:59] 
+        ID Persona: 1, 
+        Nombre: Juan, 
+        Apellido: Perez, 
+        Email: juan.perez@example.com"
+        
+11:32:19 AM:DEBUG [Persona.py:59] 
+        ID Persona: 1, 
+        Nombre: Juan, 
+        Apellido: Perez, 
+        Email: juan.perez@example.com"
+        
+11:32:19 AM:DEBUG [Persona.py:61] 
+        ID Persona: None, 
+        Nombre: Maria, 
+        Apellido: Lopez, 
+        Email: maria87@mail.com"
+        
+11:34:28 AM:DEBUG [Persona.py:59] 
+        ID Persona: 1, 
+        Nombre: Juan, 
+        Apellido: Perez, 
+        Email: juan.perez@example.com"
+        
+11:34:28 AM:DEBUG [Persona.py:61] 
+        ID Persona: None, 
+        Nombre: Maria, 
+        Apellido: Lopez, 
+        Email: maria87@mail.com"
+        
+11:34:28 AM:DEBUG [Persona.py:63] 
+        ID Persona: 1, 
+        Nombre: None, 
+        Apellido: None, 
+        Email: None"
+        
+12:15:15 PM:ERROR [conexion.py:38] Error al conectar a la base de datos: could not translate host name "('localhost'" to address: Host desconocido. 
+could not translate host name ")" to address: Host desconocido. 
+
+12:18:02 PM:ERROR [conexion.py:38] Error al conectar a la base de datos: invalid integer value "('5432'" for connection option "port"
+
+12:19:08 PM:ERROR [conexion.py:38] Error al conectar a la base de datos: could not translate host name "('localhost'" to address: Host desconocido. 
+could not translate host name ")" to address: Host desconocido. 
+
+12:19:39 PM:ERROR [conexion.py:38] Error al conectar a la base de datos: invalid integer value "('5432'" for connection option "port"
+
+12:24:20 PM:ERROR [conexion.py:52] Error al obtener el cursor: 'tuple' object has no attribute 'cursor'
