@@ -1,4 +1,5 @@
 {
-  "java.project.sourcePaths": ["JavaBeans"],
+  "java.project.sourcePaths": ["JavaBeans", "TestExcepciones1"],
+  "java.project.outputPath": "bin",
   "java.project.referencedLibraries": []
 }
