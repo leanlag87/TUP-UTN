@@ -16,7 +16,7 @@ class Conexion:
     _PASSWORD =os.getenv("DB_PASSWORD")
     _HOST =os.getenv("DB_HOST")
     _PORT =os.getenv("DB_PORT")
-    _conexion =None,
+    _conexion =None
     _cursor =None
     
     
