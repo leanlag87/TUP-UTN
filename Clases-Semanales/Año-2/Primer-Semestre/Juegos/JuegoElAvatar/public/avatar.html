@@ -8,6 +8,42 @@
   </head>
   <body>
     <h1>AVATAR 🔥💧🌱🌪</h1>
+
+    <!-- Sección de reglas del juego -->
+    <section id="reglas">
+      <button id="btn-reglas" onclick="toggleReglas()">
+        📋 Ver Reglas del Juego
+      </button>
+      <div id="contenido-reglas" style="display: none">
+        <h3>🎮 Reglas del Juego:</h3>
+        <ol>
+          <li>
+            <strong>Primer paso:</strong> Selecciona tu personaje favorito
+            (Zuko, Katara, Toph o Aang)
+          </li>
+          <li>
+            <strong>Vidas:</strong> Tanto vos como el enemigo tienen 3 vidas
+          </li>
+          <li>
+            <strong>Combate:</strong> Elige tu ataque y el enemigo elegirá uno
+            aleatorio
+          </li>
+        </ol>
+        <h4>⚔️ Reglas de combate:</h4>
+        <ul>
+          <li>
+            👊 <strong>Puño</strong> le gana a 🤼‍♂️ <strong>Barrida</strong>
+          </li>
+          <li>🦿 <strong>Patada</strong> le gana a 👊 <strong>Puño</strong></li>
+          <li>
+            🤼‍♂️ <strong>Barrida</strong> le gana a 🦿 <strong>Patada</strong>
+          </li>
+          <li>🤝 Si ambos eligen lo mismo = <strong>EMPATE</strong></li>
+        </ul>
+        <p><strong>Que gane el mejor Titan!</strong></p>
+      </div>
+    </section>
+
     <section class="seleccionar-personaje" id="seleccionar-personaje">
       <h2>Elige tu personaje</h2>
 
@@ -57,10 +93,7 @@
 
     <!-- Mensaje dinamico -->
     <section id="mensajes">
-      <p>
-        Tu personaje ataco con todo el poder del FUEGO, el personaje del enemigo
-        ataco con el medio poder de la TIERRA - GANASTES 🎉
-      </p>
+      <p></p>
     </section>
 
     <section id="reiniciar">
