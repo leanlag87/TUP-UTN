@@ -130,7 +130,7 @@ function mostrarMensajeFinal(mensaje) {
   mostrarReiniciar();
 }
 
-//Creamos uuna funcion para seleccionar el personaje del jugador
+//Creamos una funcion para seleccionar el personaje del jugador
 function seleccionarPersonajeJugador() {
   const personajes = document.querySelectorAll('input[name="personaje"]');
   let personajeSeleccionado = "";
@@ -142,10 +142,10 @@ function seleccionarPersonajeJugador() {
     }
   }
 
-  // CORREGIDO: Si no hay personaje seleccionado, salir de la función
+  //Si no hay personaje seleccionado, salir de la función
   if (personajeSeleccionado === "") {
     alert("Debes seleccionar un personaje");
-    return; // IMPORTANTE: esto evita que continúe sin selección
+    return;
   }
 
   // Mostrar el personaje seleccionado
