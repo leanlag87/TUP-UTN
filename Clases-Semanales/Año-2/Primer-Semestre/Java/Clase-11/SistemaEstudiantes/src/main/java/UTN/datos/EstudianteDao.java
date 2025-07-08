@@ -129,16 +129,50 @@ public class EstudianteDao {
         return false;
     }
 
+    // Eliminar Estudiante por ID
+    public boolean eliminarEstudiante(int idEstudiante) {
+        PreparedStatement ps;
+        Connection con = getConnection();
+        String sql = "DELETE FROM alumnos2025 WHERE idalumnos2025=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idEstudiante);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Ocurrio un error al eliminar estudiante: " +
+                    e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println("Ocurrio un error al cerrar conexion: " + e.getMessage());
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         var estudianteDAO = new EstudianteDao();
         // Modificar Estudiante
-        var nuevoEstudiante = new Estudiante(1, "Juan Carlos", "Juarez", "0343546",
-                "jcjua@test.com");
-        var modificado = estudianteDAO.modificarEstudiante(nuevoEstudiante);
-        if (modificado) {
-            System.out.println("Estudiante Modificado: " + nuevoEstudiante);
+        // var estudianteModificado = new Estudiante(1, "Juan Carlos", "Juarez",
+        // "0343546",
+        // "jcjua@test.com");
+        // var modificado = estudianteDAO.modificarEstudiante(estudianteModificado);
+        // if (modificado) {
+        // System.out.println("Estudiante Modificado: " + estudianteModificado);
+        // } else {
+        // System.out.println("No se pudo modificar el estudiante: " +
+        // estudianteModificado);
+        // }
+
+        // Eliminar Estudiante por ID
+        int idEstudiante = 20; // Cambiar por el ID del estudiante a eliminar
+        var eliminado = estudianteDAO.eliminarEstudiante(idEstudiante);
+        if (eliminado) {
+            System.out.println("Estudiante Eliminado con ID: " + idEstudiante);
         } else {
-            System.out.println("No se pudo modificar el estudiante: " + nuevoEstudiante);
+            System.out.println("No se pudo eliminar el estudiante con ID: " + idEstudiante);
         }
 
         // listar los estudiantes
