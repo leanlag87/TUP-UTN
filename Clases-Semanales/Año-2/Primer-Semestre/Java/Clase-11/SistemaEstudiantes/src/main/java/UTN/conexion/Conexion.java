@@ -3,17 +3,21 @@ package UTN.conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Conexion {
+    // Cargar variables del archivo .env
+    private static final Dotenv dotenv = Dotenv.load();
+
     // Metodo para poder conectarnos a la DB MySQL
     public static Connection getConnection() {
         Connection conexion = null;
         // Variables para conxion a la DB
-        var baseDatos = System.getenv("DB_NAME");
-        var urlBase = System.getenv("DB_URL");
+        var baseDatos = dotenv.get("DB_NAME");
+        var urlBase = dotenv.get("DB_URL");
         var url = urlBase + baseDatos;
-        var usuario = System.getenv("DB_USER");
-        var password = System.getenv("DB_PASSWORD");
+        var usuario = dotenv.get("DB_USER");
+        var password = dotenv.get("DB_PASSWORD");
 
         // Clase del driver de mysql en memoria
         try {
