@@ -130,13 +130,13 @@ public class EstudianteDao {
     }
 
     // Eliminar Estudiante por ID
-    public boolean eliminarEstudiante(int idEstudiante) {
+    public boolean eliminarEstudiante(Estudiante estudiante) {
         PreparedStatement ps;
         Connection con = getConnection();
         String sql = "DELETE FROM alumnos2025 WHERE idalumnos2025=?";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idEstudiante);
+            ps.setInt(1, estudiante.getIdEstudiante());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -168,7 +168,7 @@ public class EstudianteDao {
 
         // Eliminar Estudiante por ID
         int idEstudiante = 20; // Cambiar por el ID del estudiante a eliminar
-        var eliminado = estudianteDAO.eliminarEstudiante(idEstudiante);
+        var eliminado = estudianteDAO.eliminarEstudiante(new Estudiante(idEstudiante));
         if (eliminado) {
             System.out.println("Estudiante Eliminado con ID: " + idEstudiante);
         } else {
