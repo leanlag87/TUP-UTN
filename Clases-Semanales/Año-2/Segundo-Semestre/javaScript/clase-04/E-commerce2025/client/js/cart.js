@@ -120,7 +120,9 @@ const displayCart = () => {
         );
         const data = await response.json();
         if (data.id) {
-          // Usar el SDK de MercadoPago para mostrar el botón oficial
+          //Ocultar el boton de pagar original
+          payBtn.style.display = "none";
+          // SDK de MercadoPago para mostrar el botón oficial
           if (window.MercadoPago) {
             const mp = new window.MercadoPago(
               "APP_USR-dc4eddac-dbfc-44f3-a558-78b9c5c3af58",
@@ -138,9 +140,7 @@ const displayCart = () => {
               },
             });
           } else {
-            alert(
-              "No se encontró el SDK de MercadoPago. Verifica que el script esté incluido en tu HTML."
-            );
+            console.error("No se encontró el SDK de MercadoPago.");
           }
         } else {
           alert("Error al iniciar el pago");

@@ -6,7 +6,7 @@ products.forEach((product) => {
 
   productCard.innerHTML = `
     <img src="${product.img}" />
-    <h2>${product.productName}</h2>
+    <h2 class="product-title">${product.productName}</h2>
     <p>Precio: $${product.price}</p>
     <p>Cantidad: ${product.quantity} U.</p>
   `;
