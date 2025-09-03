@@ -2,6 +2,7 @@ const modalContainer = document.getElementById("modal-container");
 const modalOverlay = document.getElementById("modal-overlay");
 
 const cartBtn = document.getElementById("cart-btn");
+const cartCounter = document.getElementById("cart-counter");
 
 const displayCart = () => {
   //limpiar el contenido anterior del modal
@@ -60,6 +61,7 @@ const displayCart = () => {
       if (product.quantity > 1) {
         product.quantity--;
         displayCart();
+        displayCartCounter();
       }
     });
 
@@ -67,6 +69,7 @@ const displayCart = () => {
     btnIncrease.addEventListener("click", () => {
       product.quantity++;
       displayCart();
+      displayCartCounter();
     });
 
     //Boton para eliminar un articulo del carrito
@@ -76,6 +79,7 @@ const displayCart = () => {
       if (index !== -1) {
         cart.splice(index, 1);
         displayCart();
+        displayCartCounter();
       }
     });
   });
@@ -92,3 +96,14 @@ const displayCart = () => {
 };
 //Cuando el usuario apriete este btn de va a disparar la funcion displayCart
 cartBtn.addEventListener("click", displayCart);
+
+//Actualizar el contador del carrito
+const displayCartCounter = () => {
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  if (totalItems > 0) {
+    cartCounter.innerText = totalItems;
+    cartCounter.style.display = "flex";
+  } else {
+    cartCounter.style.display = "none";
+  }
+};

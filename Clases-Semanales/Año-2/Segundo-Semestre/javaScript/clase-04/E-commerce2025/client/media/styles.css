@@ -86,6 +86,22 @@ body {
   background-color: rgb(0, 50, 170);
 }
 
+.cart-counter {
+  display: none;
+  position: fixed;
+  top: 87vh;
+  right: 35px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
