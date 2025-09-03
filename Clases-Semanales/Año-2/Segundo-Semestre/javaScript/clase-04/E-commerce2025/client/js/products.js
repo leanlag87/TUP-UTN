@@ -34,4 +34,11 @@ const products = [
     quantity: 1,
     img: "../media/assets/TVSamsungSmart.jpg",
   },
+  {
+    id: 6,
+    productName: "Smartphone Samsung Galaxy A32",
+    price: 45000,
+    quantity: 1,
+    img: "../media/assets/A32.jpg",
+  },
 ];
