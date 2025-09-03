@@ -87,13 +87,68 @@ const displayCart = () => {
     //Modal Footer
     const modalFooter = document.createElement("div");
     modalFooter.className = "modal-footer";
-    modalFooter.innerHTML = `
-    <div class="total-price">Total: ${cart.reduce(
+    const total = cart.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
-    )}</div>
-  `;
+    );
+    modalFooter.innerHTML = `
+      <div class="total-price">Total: ${total}</div>
+      <button id="pay-btn" class="pay-btn">Pagar</button>
+      <div id="button-checkout"></div>
+    `;
     modalContainer.append(modalFooter);
+
+    // Lógica para el botón de pago usando el SDK de MercadoPago
+    const payBtn = modalFooter.querySelector("#pay-btn");
+    payBtn.addEventListener("click", async () => {
+      if (cart.length === 0) return;
+      const product = cart[0];
+      try {
+        const response = await fetch(
+          "http://localhost:3001/create_preference",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              title: product.productName,
+              quantity: product.quantity,
+              price: product.price,
+            }),
+          }
+        );
+        const data = await response.json();
+        if (data.id) {
+          // Usar el SDK de MercadoPago para mostrar el botón oficial
+          if (window.MercadoPago) {
+            const mp = new window.MercadoPago(
+              "APP_USR-dc4eddac-dbfc-44f3-a558-78b9c5c3af58",
+              {
+                locale: "es-AR",
+              }
+            );
+            mp.checkout({
+              preference: {
+                id: data.id,
+              },
+              render: {
+                container: "#button-checkout",
+                label: "Pagar con MercadoPago",
+              },
+            });
+          } else {
+            alert(
+              "No se encontró el SDK de MercadoPago. Verifica que el script esté incluido en tu HTML."
+            );
+          }
+        } else {
+          alert("Error al iniciar el pago");
+        }
+      } catch (error) {
+        alert("Error de conexión con el servidor");
+      }
+    });
   } else {
     const modalText = document.createElement("h2");
     modalText.className = "modal-body";

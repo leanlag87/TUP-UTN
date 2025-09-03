@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Inicializar MercadoPago con la nueva forma
+// Inicializar MercadoPago
 const client = new MercadoPagoConfig({
   accessToken: process.env.MP_ACCESS_TOKEN,
 });
@@ -32,7 +32,6 @@ app.get("/success", (req, res) => {
 app.post("/create_preference", async (req, res) => {
   try {
     const { title, quantity, price } = req.body;
-    // Validación básica
     if (!title || !quantity || !price) {
       return res.status(400).json({ error: "Faltan datos en la solicitud" });
     }
@@ -47,15 +46,16 @@ app.post("/create_preference", async (req, res) => {
         },
       ],
       back_urls: {
-        success: `http://localhost:${PORT}/success`,
-        failure: `http://localhost:${PORT}/failure`,
-        pending: `http://localhost:${PORT}/pending`,
+        success: "/success",
+        failure: "/failure",
+        pending: "",
       },
       auto_return: "approved",
     };
 
     const preference = new Preference(client);
     const result = await preference.create({ body: preferenceData });
+    console.log("Enlace de pago:", result.init_point);
     res.json({ id: result.id });
   } catch (error) {
     console.error(error);
