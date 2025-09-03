@@ -5,3 +5,6 @@
 
 # Permitir el ejemplo de entorno
 !.env.example
+
+# Ignorar dependencias de node
+/node_modules
