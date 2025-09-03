@@ -34,10 +34,11 @@ const displayCart = () => {
   modalContainer.append(modalHeader);
 
   //Modal Body
-  cart.forEach((product) => {
-    const modalBody = document.createElement("div");
-    modalBody.className = "modal-body";
-    modalBody.innerHTML = `
+  if (cart.length > 0) {
+    cart.forEach((product) => {
+      const modalBody = document.createElement("div");
+      modalBody.className = "modal-body";
+      modalBody.innerHTML = `
     <div class="product">
       <img class="product-img" src="${product.img}" />
       <div class="product-info">
@@ -54,45 +55,51 @@ const displayCart = () => {
 
       </div>
     `;
-    modalContainer.append(modalBody);
-    //Boton para restar y sumar articulos al carrito
-    const btnDecrease = modalBody.querySelector(".quantity-btn-decrease");
-    btnDecrease.addEventListener("click", () => {
-      if (product.quantity > 1) {
-        product.quantity--;
+      modalContainer.append(modalBody);
+      //Boton para restar y sumar articulos al carrito
+      const btnDecrease = modalBody.querySelector(".quantity-btn-decrease");
+      btnDecrease.addEventListener("click", () => {
+        if (product.quantity > 1) {
+          product.quantity--;
+          displayCart();
+          displayCartCounter();
+        }
+      });
+
+      const btnIncrease = modalBody.querySelector(".quantity-btn-increase");
+      btnIncrease.addEventListener("click", () => {
+        product.quantity++;
         displayCart();
         displayCartCounter();
-      }
-    });
+      });
 
-    const btnIncrease = modalBody.querySelector(".quantity-btn-increase");
-    btnIncrease.addEventListener("click", () => {
-      product.quantity++;
-      displayCart();
-      displayCartCounter();
+      //Boton para eliminar un articulo del carrito
+      const btnDelete = modalBody.querySelector(".delete-product");
+      btnDelete.addEventListener("click", () => {
+        const index = cart.findIndex((item) => item.id === product.id);
+        if (index !== -1) {
+          cart.splice(index, 1);
+          displayCart();
+          displayCartCounter();
+        }
+      });
     });
-
-    //Boton para eliminar un articulo del carrito
-    const btnDelete = modalBody.querySelector(".delete-product");
-    btnDelete.addEventListener("click", () => {
-      const index = cart.findIndex((item) => item.id === product.id);
-      if (index !== -1) {
-        cart.splice(index, 1);
-        displayCart();
-        displayCartCounter();
-      }
-    });
-  });
-  //Modal Footer
-  const modalFooter = document.createElement("div");
-  modalFooter.className = "modal-footer";
-  modalFooter.innerHTML = `
+    //Modal Footer
+    const modalFooter = document.createElement("div");
+    modalFooter.className = "modal-footer";
+    modalFooter.innerHTML = `
     <div class="total-price">Total: ${cart.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
     )}</div>
   `;
-  modalContainer.append(modalFooter);
+    modalContainer.append(modalFooter);
+  } else {
+    const modalText = document.createElement("h2");
+    modalText.className = "modal-body";
+    modalText.innerText = "No hay productos en el carrito";
+    modalContainer.append(modalText);
+  }
 };
 //Cuando el usuario apriete este btn de va a disparar la funcion displayCart
 cartBtn.addEventListener("click", displayCart);
