@@ -41,4 +41,11 @@ const products = [
     quantity: 1,
     img: "../media/assets/A32.jpg",
   },
+  {
+    id: 7,
+    productName: "Reloj Casio Retro Calculadora Ca-53w",
+    price: 30000,
+    quantity: 1,
+    img: "../media/assets/relojCasio.jpg",
+  },
 ];
