@@ -15,10 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor // Genera automaticamente un constructor sin argumentos (vacio)
 @AllArgsConstructor // Genera automaticamente un constructor con todos los argumentos
 @ToString // Genera automaticamente el metodo toString
-public class Estudiante {
+public class Alumnos2025 {
     @Id // Indica que este campo es la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que el valor de este campo se genera automaticamente
-    private Integer idEstudiante;
+    private Integer idalumnos2025;
     private String nombre;
     private String apellido;
     private String email;
