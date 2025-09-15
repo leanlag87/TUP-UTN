@@ -68,6 +68,62 @@ public class EstudiantesApplication implements CommandLineRunner {
 				List<Alumnos2025> estudiantes = estudianteServicio.listarEstudiantes();
 				estudiantes.forEach(estudiante -> logger.info(estudiante.toString() + nl));
 			}
+			case 2 -> {
+				logger.info("Ingrese el ID del estudiante a buscar:");
+				var idBuscar = Integer.parseInt(consola.nextLine());
+				var estudiante = estudianteServicio.buscarEstudiantePorId(idBuscar);
+				if (estudiante != null) {
+					logger.info(nl + "Estudiante encontrado:" + nl + estudiante + nl);
+				} else {
+					logger.warn(nl + "No se encontro ningun estudiante con ID: " + idBuscar + nl);
+				}
+			}
+			case 3 -> {
+				logger.info("Ingrese el nombre del nuevo estudiante:");
+				var nombre = consola.nextLine();
+				logger.info("Ingrese el apellido del nuevo estudiante:");
+				var apellido = consola.nextLine();
+				logger.info("Ingrese el numero de telefono:");
+				var telefono = consola.nextLine();
+				logger.info("Ingrese el email:");
+				var email = consola.nextLine();
+				// Creanmos el objeto estudiante sin el id porque es autogenerado
+				var nuevoEstudiante = new Alumnos2025();
+				nuevoEstudiante.setNombre(nombre);
+				nuevoEstudiante.setApellido(apellido);
+				nuevoEstudiante.setTelefono(telefono);
+				nuevoEstudiante.setEmail(email);
+				estudianteServicio.guardarEstudiante(nuevoEstudiante);
+				logger.info(nl + "Nuevo estudiante agregado con exito:" + nl + nuevoEstudiante + nl);
+
+			}
+			case 4 -> {
+				logger.info("Ingrese el ID del estudiante a modificar:");
+				var idModificar = Integer.parseInt(consola.nextLine());
+				// Buscamos el estudiante por ID
+				Alumnos2025 estudianteModificar = estudianteServicio.buscarEstudiantePorId(idModificar);
+				if (estudianteModificar != null) {
+					logger.info("Nombre: ");
+					var nombre = consola.nextLine();
+					logger.info("Apellido: ");
+					var apellido = consola.nextLine();
+					logger.info("Telefono: ");
+					var telefono = consola.nextLine();
+					logger.info("Email: ");
+					var email = consola.nextLine();
+					// Actualizamos los datos del estudiante
+					estudianteModificar.setNombre(nombre);
+					estudianteModificar.setApellido(apellido);
+					estudianteModificar.setTelefono(telefono);
+					estudianteModificar.setEmail(email);
+					// Guardamos los cambios
+					estudianteServicio.guardarEstudiante(estudianteModificar);
+					logger.info(nl + "Estudiante modificado con exito:" + nl + estudianteModificar + nl);
+				} else {
+					logger.warn(nl + "No se encontro ningun estudiante con ID: " + idModificar + nl);
+				}
+
+			}
 
 		}// Fin switch
 
