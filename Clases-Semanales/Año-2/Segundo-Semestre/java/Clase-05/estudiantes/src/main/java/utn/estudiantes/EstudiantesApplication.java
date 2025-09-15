@@ -46,7 +46,7 @@ public class EstudiantesApplication implements CommandLineRunner {
 	}
 
 	private void mostrarMenu() {
-		// logger.info(nl);
+
 		logger.info("""
 				===== Menu de Estudiantes 2025 =====
 				1. Listar estudiantes
@@ -136,6 +136,11 @@ public class EstudiantesApplication implements CommandLineRunner {
 					logger.warn(nl + "No se encontro ningun estudiante con ID: " + idEliminar + nl);
 				}
 			}
+			case 6 -> {
+				logger.info(nl + "Saliendo de la aplicacion. Hasta luego!" + nl);
+				salir = true;
+			}
+			default -> logger.warn(nl + "Opcion invalida. Por favor, intente de nuevo." + nl);
 
 		}// Fin switch
 
