@@ -46,7 +46,7 @@ public class EstudiantesApplication implements CommandLineRunner {
 	}
 
 	private void mostrarMenu() {
-		logger.info(nl);
+		// logger.info(nl);
 		logger.info("""
 				===== Menu de Estudiantes 2025 =====
 				1. Listar estudiantes
@@ -123,6 +123,18 @@ public class EstudiantesApplication implements CommandLineRunner {
 					logger.warn(nl + "No se encontro ningun estudiante con ID: " + idModificar + nl);
 				}
 
+			}
+			case 5 -> {
+				logger.info("Ingrese el ID del estudiante a eliminar:");
+				var idEliminar = Integer.parseInt(consola.nextLine());
+				// Buscamos el estudiante por ID
+				Alumnos2025 estudianteEliminar = estudianteServicio.buscarEstudiantePorId(idEliminar);
+				if (estudianteEliminar != null) {
+					estudianteServicio.eliminarEstudiante(estudianteEliminar);
+					logger.info(nl + "Estudiante eliminado con exito:" + nl + estudianteEliminar + nl);
+				} else {
+					logger.warn(nl + "No se encontro ningun estudiante con ID: " + idEliminar + nl);
+				}
 			}
 
 		}// Fin switch
