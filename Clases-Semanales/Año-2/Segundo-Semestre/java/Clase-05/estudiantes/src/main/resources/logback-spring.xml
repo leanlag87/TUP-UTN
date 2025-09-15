@@ -19,7 +19,8 @@
 
             <!-- [Date and time] [Thread] LoggingLevel : LoggerName - Logging message -->
             <!-- <pattern>[%thread] %-5level: %logger - %msg%n</pattern> -->
-            <pattern>%msg</pattern>
+            <!-- <pattern>%msg</pattern> -->
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
