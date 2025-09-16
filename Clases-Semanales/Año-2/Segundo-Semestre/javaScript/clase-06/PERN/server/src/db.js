@@ -1,11 +1,11 @@
 //Aqui va estar el codigo de la base de datos
 
-import { Pool } from "pg";
+import pg from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const pool = new Pool({
+export const pool = new pg.Pool({
   user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
@@ -13,4 +13,6 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-export default pool;
+pool.on("connect", () => {
+  console.log("Conectado a la base de datos");
+});
