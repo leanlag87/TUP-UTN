@@ -7,19 +7,23 @@ export const getTasks = (req, res) => res.send("Obteniendo tareas");
 export const getTaskById = (req, res) =>
   res.send("Obteniendo tarea con ID: " + req.params.id);
 
-export const createTask = async (req, res) => {
+export const createTask = async (req, res, next) => {
   const { title, description } = req.body;
 
   try {
-    const { rows } = await pool.query(
+    const result = await pool.query(
       "INSERT INTO tasks (title, description) VALUES ($1, $2) RETURNING *",
       [title, description]
     );
-    console.log(rows);
-    res.send("Creando tarea");
+    res.json(result.rows[0]);
+    console.log(result);
+    // res.send("Creando tarea");
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Error al crear tarea");
+    if (error.code === "23505") {
+      return res.status(409).json({ message: "La tarea ya existe" });
+    }
+    console.error(error);
+    next(error); // Pasar el error al middleware de manejo de errores
   }
 };
 
