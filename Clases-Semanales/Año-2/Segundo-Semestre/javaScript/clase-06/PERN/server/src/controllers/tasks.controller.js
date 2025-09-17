@@ -39,13 +39,17 @@ export const createTask = async (req, res, next) => {
   }
 };
 
-export const updateTask = (req, res) =>
-  res.send(
-    "Actualizando tarea con ID: " +
-      req.params.id +
-      ", Nuevos datos: " +
-      JSON.stringify(req.body)
+export const updateTask = async (req, res) => {
+  const { title, description } = req.body;
+  const id = req.params.id;
+  const result = await pool.query(
+    "UPDATE tasks SET title = $1, description = $2 WHERE id = $3 RETURNING *",
+    [title, description, id]
   );
+  if (result.rowCount === 0)
+    return res.status(404).json({ message: "Tarea no encontrada" });
+  return res.json(result.rows[0]);
+};
 
 export const deleteTask = async (req, res) => {
   const result = await pool.query("DELETE FROM tasks WHERE id = $1", [
