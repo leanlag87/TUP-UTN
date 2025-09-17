@@ -8,8 +8,14 @@ export const getTasks = async (req, res) => {
   return res.json(result.rows);
 };
 
-export const getTaskById = (req, res) =>
-  res.send("Obteniendo tarea con ID: " + req.params.id);
+export const getTaskById = async (req, res) => {
+  const result = await pool.query("SELECT * FROM tasks WHERE id = $1", [
+    req.params.id,
+  ]);
+  if (result.rowCount === 0)
+    return res.status(404).json({ message: "Tarea no encontrada" });
+  return res.json(result.rows[0]);
+};
 
 export const createTask = async (req, res, next) => {
   const { title, description } = req.body;
@@ -41,5 +47,11 @@ export const updateTask = (req, res) =>
       JSON.stringify(req.body)
   );
 
-export const deleteTask = (req, res) =>
-  res.send("Eliminando tarea con ID: " + req.params.id);
+export const deleteTask = async (req, res) => {
+  const result = await pool.query("DELETE FROM tasks WHERE id = $1", [
+    req.params.id,
+  ]);
+  if (result.rowCount === 0)
+    return res.status(404).json({ message: "Tarea no encontrada" });
+  return res.send(`Tarea ${req.params.id} eliminada con éxito`);
+};
