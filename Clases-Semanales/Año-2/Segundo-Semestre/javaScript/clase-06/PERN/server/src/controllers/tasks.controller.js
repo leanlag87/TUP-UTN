@@ -2,15 +2,10 @@
 
 import { pool } from "../db.js";
 
-export const getTasks = async (req, res, next) => {
-  try {
-    const result = await pool.query("SELECT * FROM tasks");
-    console.log(result);
-    return res.json(result.rows);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
+export const getTasks = async (req, res) => {
+  const result = await pool.query("SELECT * FROM tasks");
+  console.log(result);
+  return res.json(result.rows);
 };
 
 export const getTaskById = (req, res) =>
@@ -29,7 +24,9 @@ export const createTask = async (req, res, next) => {
     // res.send("Creando tarea");
   } catch (error) {
     if (error.code === "23505") {
-      return res.status(409).json({ message: "La tarea ya existe" });
+      return res
+        .status(409)
+        .json({ message: "La tarea con ese título ya existe" });
     }
     console.error(error);
     next(error); // Pasar el error al middleware de manejo de errores
