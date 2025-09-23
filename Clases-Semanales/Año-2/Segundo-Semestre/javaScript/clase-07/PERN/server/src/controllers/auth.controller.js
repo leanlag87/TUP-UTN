@@ -1,4 +1,5 @@
 import { pool } from "../db.js";
+import bcrypt from "bcrypt";
 
 // Controlador para la autenticación
 
@@ -9,10 +10,16 @@ export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+    // Hashear la contraseña antes de guardarla
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+
+    // Guardar el usuario en la base de datos
     const result = await pool.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-      [name, email, password]
+      [name, email, hashedPassword]
     );
+
     console.log(result);
     return res.json(result.rows[0]);
   } catch (error) {
