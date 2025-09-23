@@ -1,5 +1,6 @@
 import { pool } from "../db.js";
 import bcrypt from "bcrypt";
+import createAccessToken from "../libs/jwt.js";
 
 // Controlador para la autenticación
 
@@ -20,8 +21,17 @@ export const register = async (req, res) => {
       [name, email, hashedPassword]
     );
 
+    // Crear un token de acceso
+    const token = await createAccessToken({ id: result.rows[0].id });
     console.log(result);
-    return res.json(result.rows[0]);
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    });
+
+    //return res.json(result.rows[0]);
+    return res.json({ token: token });
   } catch (error) {
     if (error.code === "23505") {
       // Código de error para violación de restricción única
@@ -29,6 +39,9 @@ export const register = async (req, res) => {
         .status(400)
         .json({ error: "Error: El correo electrónico ya está en uso." });
     }
+    // Manejar otros errores
+    console.error("Error durante el registro:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
 
