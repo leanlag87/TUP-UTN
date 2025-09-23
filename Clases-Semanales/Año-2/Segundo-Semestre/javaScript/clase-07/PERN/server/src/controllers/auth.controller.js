@@ -5,15 +5,24 @@ import { pool } from "../db.js";
 export const login = (req, res) =>
   res.send("Iniciando sesión con datos: " + JSON.stringify(req.body));
 
-export const register = (req, res) => {
+export const register = async (req, res) => {
   const { name, email, password } = req.body;
-  res.send(`Registrando usuario: ${name}, Email: ${email}`);
 
-  pool.query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)", [
-    name,
-    email,
-    password,
-  ]);
+  try {
+    const result = await pool.query(
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+      [name, email, password]
+    );
+    console.log(result);
+    return res.json(result.rows[0]);
+  } catch (error) {
+    if (error.code === "23505") {
+      // Código de error para violación de restricción única
+      return res
+        .status(400)
+        .json({ error: "Error: El correo electrónico ya está en uso." });
+    }
+  }
 };
 
 export const logout = (req, res) => res.send("Cerrando sesión");
