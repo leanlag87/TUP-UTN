@@ -15,12 +15,12 @@ const router = Router();
 
 router.get("/tasks", isAuth, getTasks);
 
-router.get("/tasks/:id", getTaskById);
+router.get("/tasks/:id", isAuth, getTaskById);
 
-router.post("/tasks", createTask);
+router.post("/tasks", isAuth, createTask);
 
-router.put("/tasks/:id", updateTask);
+router.put("/tasks/:id", isAuth, updateTask);
 
-router.delete("/tasks/:id", deleteTask);
+router.delete("/tasks/:id", isAuth, deleteTask);
 
 export default router;
