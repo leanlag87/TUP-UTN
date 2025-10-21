@@ -1,6 +1,7 @@
 //Aqui va estar el codigo del servidor de express
 import express from "express";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import tasksRoutes from "./router/tasks.routes.js";
 import authRoutes from "./router/auth.routes.js";
 
@@ -12,6 +13,7 @@ app.use(morgan("dev"));
 
 // Para que el servidor entienda JSON
 app.use(express.json());
+app.use(cookieParser()); // Para manejar cookies
 
 // Para que el servidor entienda datos de formularios
 app.use(express.urlencoded({ extended: false }));
