@@ -7,11 +7,13 @@ import {
   updateTask,
 } from "../controllers/tasks.controller.js";
 
+import { isAuth } from "../middlewares/auth.middleware.js";
+
 const router = Router();
 
 // Aqui van a estar las rutas relacionadas con las tareas
 
-router.get("/tasks", getTasks);
+router.get("/tasks", isAuth, getTasks);
 
 router.get("/tasks/:id", getTaskById);
 
