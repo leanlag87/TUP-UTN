@@ -36,15 +36,15 @@ export const login = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   });
 
-  //return res.json(result.rows[0]);
-  return res.json({
-    token: token,
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    },
-  });
+  return res.json(result.rows[0]);
+  // return res.json({
+  //   token: token,
+  //   user: {
+  //     id: user.id,
+  //     name: user.name,
+  //     email: user.email,
+  //   },
+  // });
 };
 
 export const register = async (req, res, next) => {
