@@ -1,9 +1,9 @@
 import { pool } from "../db.js";
 import bcrypt from "bcrypt";
 import createAccessToken from "../libs/jwt.js";
+import md5 from "md5";
 
 // Controlador para la autenticación
-
 export const login = async (req, res) => {
   const { email, password } = req.body; // Obtener email y password del cuerpo de la solicitud
 
@@ -55,10 +55,15 @@ export const register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log(hashedPassword);
 
+    // Crear un avatar por defecto basado en el email del usuario
+    const gravatarUrl = `https://www.gravatar.com/avatar/${md5(
+      email
+    )}?d=identicon`;
+
     // Guardar el usuario en la base de datos
     const result = await pool.query(
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-      [name, email, hashedPassword]
+      "INSERT INTO users (name, email, password, gravatar_url) VALUES ($1, $2, $3, $4) RETURNING *",
+      [name, email, hashedPassword, gravatarUrl]
     );
 
     // Crear un token de acceso
