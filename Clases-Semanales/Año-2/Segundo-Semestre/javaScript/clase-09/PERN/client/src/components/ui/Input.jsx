@@ -1,4 +1,4 @@
-const Input = (props) => {
+export const Input = (props) => {
   return (
     <input
       type="text"
@@ -7,5 +7,3 @@ const Input = (props) => {
     />
   );
 };
-
-export default Input;

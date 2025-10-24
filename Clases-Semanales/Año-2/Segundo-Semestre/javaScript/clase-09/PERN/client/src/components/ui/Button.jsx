@@ -1,4 +1,4 @@
-const Button = ({ children }) => {
+export const Button = ({ children }) => {
   return (
     <button
       className="relative inline-flex items-center gap-1.5 text-sm font-semibold
@@ -11,5 +11,3 @@ const Button = ({ children }) => {
     </button>
   );
 };
-
-export default Button;

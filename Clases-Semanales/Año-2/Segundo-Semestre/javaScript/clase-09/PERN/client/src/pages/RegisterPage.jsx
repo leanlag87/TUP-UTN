@@ -1,6 +1,4 @@
-import Input from "../components/ui/input";
-import Card from "../components/ui/Card";
-import Button from "../components/ui/Button";
+import { Button, Card, Input } from "../components/ui";
 
 const RegisterPage = () => {
   return (
