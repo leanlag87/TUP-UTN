@@ -1,18 +1,20 @@
-import React from "react";
 import Input from "../components/ui/input";
+import Card from "../components/ui/Card";
+import Button from "../components/ui/Button";
 
 const RegisterPage = () => {
   return (
-    <div>
-      <h3 className="text-2xl font-bold">RegisterPage</h3>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+      <Card>
+        <h3 className="text-2xl font-bold">Registro</h3>
+        <form>
+          <Input placeholder="Ingrese Su Nombre" />
+          <Input type="email" placeholder="Ingrese Su Correo " />
+          <Input type="password" placeholder="Ingrese Su Contraseña" />
 
-      <form>
-        <Input placeholder="Ingrese Su Nombre" />
-        <Input type="email" placeholder="Ingrese Su Correo " />
-        <Input type="password" placeholder="Ingrese Su Contraseña" />
-
-        <button>Registrarse</button>
-      </form>
+          <Button>Registrarse</Button>
+        </form>
+      </Card>
     </div>
   );
 };
