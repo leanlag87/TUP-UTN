@@ -85,7 +85,11 @@ export const register = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => res.send("Cerrando sesión");
+export const logout = (req, res) => {
+  //Cerramos la sesión eliminando la cookie
+  res.clearCookie("token");
+  return res.json({ message: "Sesión cerrada correctamente" });
+};
 
 export const getProfile = (req, res) =>
   res.send("Obteniendo perfil de usuario");
