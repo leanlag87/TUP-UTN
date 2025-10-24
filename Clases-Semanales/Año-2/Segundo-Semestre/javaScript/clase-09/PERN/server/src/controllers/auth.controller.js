@@ -47,7 +47,7 @@ export const login = async (req, res) => {
   });
 };
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   try {
@@ -79,10 +79,13 @@ export const register = async (req, res) => {
         .status(400)
         .json({ error: "Error: El correo electrónico ya está en uso." });
     }
-    // Manejar otros errores
-    console.error("Error durante el registro:", error);
-    return res.status(500).json({ error: "Error interno del servidor" });
+
+    next(error);
   }
+  // Manejar otros errores
+  //   console.error("Error durante el registro:", error);
+  //   return res.status(500).json({ error: "Error interno del servidor" });
+  // }
 };
 
 export const logout = (req, res) => {
@@ -91,5 +94,11 @@ export const logout = (req, res) => {
   return res.json({ message: "Sesión cerrada correctamente" });
 };
 
-export const getProfile = (req, res) =>
-  res.send("Obteniendo perfil de usuario");
+export const getProfile = async (req, res) => {
+  //Obtener el perfil del usuario autenticado
+  const result = await pool.query(
+    "SELECT id, name, email FROM users WHERE id = $1",
+    [req.userId]
+  );
+  return res.json(result.rows[0]);
+};
