@@ -8,6 +8,8 @@ CREATE TABLE tasks (
     description TEXT,
 );
 
+ALTER TABLE tasks ADD COLUMN usuario_id INTEGER REFERENCES users(id);
+
 #Creamos una tabla para los usuarios
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -17,3 +19,7 @@ CREATE TABLE users (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 );
+
+# Agregamos la columna gravatar_url para almacenar la URL del avatar de Gravatar
+# md5 nos crea un avatar por defecto basado en el email del usuario
+ALTER TABLE users ADD COLUMN gravatar_url VARCHAR(255);
