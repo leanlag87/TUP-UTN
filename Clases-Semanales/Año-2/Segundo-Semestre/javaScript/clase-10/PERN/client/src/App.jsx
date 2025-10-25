@@ -6,6 +6,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import TasksPage from "./pages/TasksPage.jsx";
 import TaskFormPage from "./pages/TaskFormPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/tasks" element={<TasksPage />} />
       <Route path="/tasks/new" element={<TaskFormPage />} />
       <Route path="/tasks/edit/:id" element={<TaskFormPage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
