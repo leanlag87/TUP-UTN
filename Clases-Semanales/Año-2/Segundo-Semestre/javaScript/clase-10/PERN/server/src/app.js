@@ -16,6 +16,7 @@ app.use(morgan("dev"));
 app.use(
   cors({
     origin: process.env.FRONTEND_URL, //la URL del frontend
+    credentials: true, //permitir cookies
   })
 );
 
