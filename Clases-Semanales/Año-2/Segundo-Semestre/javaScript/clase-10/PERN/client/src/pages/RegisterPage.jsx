@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Button, Card, Input, Label } from "../components/ui";
+import { Button, Card, Input, Label, Container } from "../components/ui";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -21,7 +21,7 @@ const RegisterPage = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+    <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
       <Card>
         {error &&
           error.map((error) => {
@@ -72,7 +72,7 @@ const RegisterPage = () => {
           </Link>
         </div>
       </Card>
-    </div>
+    </Container>
   );
 };
 
