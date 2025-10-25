@@ -1,19 +1,16 @@
 import { Button, Card, Input, Label } from "../components/ui";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { API_URL } from "../config/api";
-import axios from "Axios";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
+  const { signin } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    // lógica para manejar el inicio de sesión
-    const res = await axios.post(`${API_URL}/login`, data, {
-      withCredentials: true,
-    });
-    console.log(res);
+    await signin(data);
+    navigate("/profile");
   });
 
   return (

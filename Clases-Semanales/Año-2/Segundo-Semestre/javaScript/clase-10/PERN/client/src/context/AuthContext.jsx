@@ -19,18 +19,35 @@ export const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [error, setError] = useState(null);
 
+  const signin = async (data) => {
+    const res = await axios.post(`${API_URL}/login`, data, {
+      withCredentials: true,
+    });
+    console.log(res.data);
+    setUser(res.data.user);
+  };
+
   const signup = async (data) => {
     const res = await axios.post(`${API_URL}/register`, data, {
       withCredentials: true,
     });
 
-    console.log(res);
+    console.log(res.data);
     setUser(res.data.user);
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuth, error, signup, setUser, setIsAuth, setError }}
+      value={{
+        user,
+        isAuth,
+        error,
+        signup,
+        signin,
+        setUser,
+        setIsAuth,
+        setError,
+      }}
     >
       {children}
     </AuthContext.Provider>
