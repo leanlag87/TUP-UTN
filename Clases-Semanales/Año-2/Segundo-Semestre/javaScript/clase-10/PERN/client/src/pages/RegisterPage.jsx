@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Button, Card, Input } from "../components/ui";
+import { API_URL } from "../config/api";
 
 const RegisterPage = () => {
   const {
@@ -8,8 +9,18 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  // Función que se ejecuta al enviar el formulario hace la petición al backend
+  const onSubmit = async (data) => {
     console.log(data);
+    const response = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    console.log(json);
   };
 
   return (

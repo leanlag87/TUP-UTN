@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# archivo donde estan las variables de entorno
+client/.env
