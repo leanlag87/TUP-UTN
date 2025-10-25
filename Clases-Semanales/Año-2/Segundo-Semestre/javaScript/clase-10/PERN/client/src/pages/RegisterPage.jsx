@@ -13,6 +13,7 @@ const RegisterPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     const response = await fetch(`${API_URL}/register`, {
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(data),
       headers: {
