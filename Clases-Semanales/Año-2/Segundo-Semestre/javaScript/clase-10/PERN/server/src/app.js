@@ -4,12 +4,20 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import tasksRoutes from "./router/tasks.routes.js";
 import authRoutes from "./router/auth.routes.js";
+import cors from "cors";
 
 // Exportamos e instanciamos la app de express
 const app = express();
 
 //usamos morgan para ver las peticiones por consola
 app.use(morgan("dev"));
+//permitir solicitudes desde otros dominios
+//en este caso solo le damos permiso a nuestro front
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL, //la URL del frontend
+  })
+);
 
 // Para que el servidor entienda JSON
 app.use(express.json());
