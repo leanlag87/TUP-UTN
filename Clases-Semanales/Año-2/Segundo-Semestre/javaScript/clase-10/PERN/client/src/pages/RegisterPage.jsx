@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Button, Card, Input } from "../components/ui";
 import { API_URL } from "../config/api";
+import axios from "Axios";
 
 const RegisterPage = () => {
   const {
@@ -10,19 +11,25 @@ const RegisterPage = () => {
   } = useForm();
 
   // Función que se ejecuta al enviar el formulario hace la petición al backend
-  const onSubmit = async (data) => {
-    console.log(data);
-    const response = await fetch(`${API_URL}/register`, {
-      credentials: "include",
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  const onSubmit = handleSubmit(async (data) => {
+    // console.log(data);
+    // const response = await fetch(`${API_URL}/register`, {
+    //   credentials: "include",
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const json = await response.json();
+
+    //Todo lo de arriba hecho con "fetch" lo reduciomos con estas lineas con Axios
+    const res = await axios.post(`${API_URL}/register`, data, {
+      withCredentials: true,
     });
-    const json = await response.json();
-    console.log(json);
-  };
+
+    console.log(res);
+  });
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4">
