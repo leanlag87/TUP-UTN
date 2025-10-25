@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Button, Card, Input, Label } from "../components/ui";
-import { API_URL } from "../config/api";
-import axios from "Axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const RegisterPage = () => {
   const {
@@ -11,25 +10,12 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
+  const { signup } = useAuth();
+  const navigate = useNavigate();
   // Función que se ejecuta al enviar el formulario hace la petición al backend
   const onSubmit = handleSubmit(async (data) => {
-    // console.log(data);
-    // const response = await fetch(`${API_URL}/register`, {
-    //   credentials: "include",
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // const json = await response.json();
-
-    //Todo lo de arriba hecho con "fetch" lo reduciomos con estas lineas con Axios
-    const res = await axios.post(`${API_URL}/register`, data, {
-      withCredentials: true,
-    });
-
-    console.log(res);
+    await signup(data);
+    navigate("/profile");
   });
 
   return (
