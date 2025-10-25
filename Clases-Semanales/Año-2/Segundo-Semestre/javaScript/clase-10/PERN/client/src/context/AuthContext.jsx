@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useContext } from "react";
-import { API_URL } from "../config/api";
-import axios from "Axios";
+import { createContext, useState, useContext, useEffect } from "react";
+import api from "../config/api";
+import Cookie from "js-cookie";
 
 export const AuthContext = createContext();
 
@@ -17,24 +17,54 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setErrors] = useState(null);
 
   const signin = async (data) => {
-    const res = await axios.post(`${API_URL}/login`, data, {
-      withCredentials: true,
-    });
-    console.log(res.data);
-    setUser(res.data.user);
+    try {
+      const res = await api.post("/login", data);
+      setUser(res.data.user);
+      setIsAuth(true);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      setErrors([error.response.data.message]);
+    }
   };
 
   const signup = async (data) => {
-    const res = await axios.post(`${API_URL}/register`, data, {
-      withCredentials: true,
-    });
-
-    console.log(res.data);
-    setUser(res.data.user);
+    try {
+      const res = await api.post("/register", data);
+      setUser(res.data.user);
+      setIsAuth(true);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      setErrors([error.response.data.message]);
+    }
   };
+
+  //Para que al recargar la pagina no se pierda la sesion
+  useEffect(() => {
+    if (Cookie.get("token")) {
+      api
+        .get("/profile")
+        .then((res) => {
+          setUser(res.data.user);
+          setIsAuth(true);
+        })
+        .catch((error) => {
+          setUser(null);
+          setIsAuth(false);
+          console.log(error);
+        });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -46,7 +76,7 @@ export const AuthProvider = ({ children }) => {
         signin,
         setUser,
         setIsAuth,
-        setError,
+        setErrors,
       }}
     >
       {children}

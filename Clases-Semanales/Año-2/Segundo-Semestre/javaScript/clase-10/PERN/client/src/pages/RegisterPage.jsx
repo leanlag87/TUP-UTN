@@ -10,17 +10,24 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const { signup } = useAuth();
+  const { signup, error } = useAuth();
   const navigate = useNavigate();
   // Función que se ejecuta al enviar el formulario hace la petición al backend
   const onSubmit = handleSubmit(async (data) => {
-    await signup(data);
-    navigate("/profile");
+    const user = await signup(data);
+    if (user) {
+      navigate("/profile");
+    }
   });
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4">
       <Card>
+        {error &&
+          error.map((error) => {
+            <p className="bg-red-500 text-white p-2 mb-2 rounded">{error}</p>;
+          })}
+
         <h3 className="text-4xl font-bold my-2">Registro</h3>
         <form
           className="flex flex-col gap-4 mt-4"
