@@ -4,6 +4,8 @@ export const validateSchema = (schema) => async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ error: error.errors });
+    if (Array.isArray(error.errors)) {
+      return res.status(400).json({ error: error.errors });
+    }
   }
 };

@@ -8,14 +8,16 @@ import {
 } from "../controllers/auth.controller.js";
 
 import { isAuth } from "../middlewares/auth.middleware.js";
+import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
+import { validateSchema } from "../middlewares/validate.middleware.js";
 
 const router = Router();
 
-// Aqui van a estar las rutas relacionadas con la autenticación
+// Rutas relacionadas con la autenticación
 
-router.post("/login", login);
+router.post("/login", validateSchema(loginSchema), login);
 
-router.post("/register", register);
+router.post("/register", validateSchema(registerSchema), register);
 
 router.post("/logout", logout);
 
