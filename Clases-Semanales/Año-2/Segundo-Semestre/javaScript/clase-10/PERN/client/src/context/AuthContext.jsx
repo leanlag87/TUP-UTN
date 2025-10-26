@@ -49,6 +49,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signout = async () => {
+    try {
+      await api.post("/logout");
+      setUser(null);
+      setIsAuth(false);
+      Cookie.remove("token");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //Para que al recargar la pagina no se pierda la sesion
   useEffect(() => {
     if (Cookie.get("token")) {
@@ -77,6 +88,7 @@ export const AuthProvider = ({ children }) => {
         setUser,
         setIsAuth,
         setErrors,
+        signout,
       }}
     >
       {children}

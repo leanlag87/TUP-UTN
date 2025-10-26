@@ -1,16 +1,4 @@
-export const navigation = [
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
-    name: "Login",
-    path: "/login",
-  },
-  {
-    name: "Registro",
-    path: "/register",
-  },
+export const PrivateRoutes = [
   {
     name: "Perfil",
     path: "/profile",
@@ -26,5 +14,20 @@ export const navigation = [
   {
     name: "Editar Tarea",
     path: "/tasks/edit/:id",
+  },
+];
+
+export const PublicRoutes = [
+  {
+    name: "About",
+    path: "/about",
+  },
+  {
+    name: "Login",
+    path: "/login",
+  },
+  {
+    name: "Registro",
+    path: "/register",
   },
 ];
