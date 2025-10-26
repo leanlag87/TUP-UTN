@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { navigation } from "./navigation";
 import { Container } from "../ui";
 
+// Me quede en el video Parte 3 -> Protected Routes  tengo q verlo desde 0:00
+
 const Navbar = () => {
   const location = useLocation();
 
