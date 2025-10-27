@@ -5,9 +5,8 @@ import {
   deleteTaskRequest,
   createTasksRequest,
   getTaskRequest,
+  updateTaskRequest,
 } from "../config/tasks.api";
-
-// tengo que ver desde el video "Parte 2 -> Editar tareas"
 
 const TasksContext = createContext();
 
@@ -58,9 +57,28 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const updateTask = async (id, task) => {
+    try {
+      const res = await updateTaskRequest(id, task);
+      return res.data;
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <TasksContext.Provider
-      value={{ tasks, getTasks, deleteTask, createTask, error, getTask }}
+      value={{
+        tasks,
+        getTasks,
+        deleteTask,
+        createTask,
+        error,
+        getTask,
+        updateTask,
+      }}
     >
       {children}
     </TasksContext.Provider>

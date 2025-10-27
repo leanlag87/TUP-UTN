@@ -16,7 +16,9 @@ import { TasksProvider } from "./context/TasksContext.jsx";
 const App = () => {
   const { isAuth, loading } = useAuth();
   if (loading) {
-    return <h1>Cargando...</h1>;
+    setTimeout(() => {
+      return <h1>Cargando...</h1>;
+    }, 1000);
   }
 
   return (
