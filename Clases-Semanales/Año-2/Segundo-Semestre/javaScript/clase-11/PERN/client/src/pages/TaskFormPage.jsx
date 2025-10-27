@@ -13,14 +13,14 @@ const TaskFormPage = () => {
   } = useForm();
   const params = useParams();
   const navigate = useNavigate();
-  const { createTask, getTask, error: tasksError } = useTasks();
+  const { createTask, getTask, updateTask, error: tasksError } = useTasks();
   const onSubmit = handleSubmit(async (data) => {
     let task;
     if (!params.id) {
       task = await createTask(data);
       // Lógica para actualizar la tarea existente (a implementar)
     } else {
-      console.log("Editando...");
+      task = await updateTask(params.id, data);
       if (task) {
         navigate("/tasks");
       }

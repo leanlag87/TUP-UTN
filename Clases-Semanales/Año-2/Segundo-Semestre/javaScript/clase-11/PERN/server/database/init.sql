@@ -10,6 +10,9 @@ CREATE TABLE tasks (
 
 ALTER TABLE tasks ADD COLUMN usuario_id INTEGER REFERENCES users(id);
 
+-- Eliminamos el titulo unico para permitir titulos repetidos
+ALTER TABLE tasks DROP CONSTRAINT tasks_title_key;
+
 #Creamos una tabla para los usuarios
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
