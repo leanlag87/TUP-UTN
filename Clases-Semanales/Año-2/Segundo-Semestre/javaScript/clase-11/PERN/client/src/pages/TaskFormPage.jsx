@@ -18,12 +18,11 @@ const TaskFormPage = () => {
     let task;
     if (!params.id) {
       task = await createTask(data);
-      // Lógica para actualizar la tarea existente (a implementar)
+      navigate("/tasks");
     } else {
       task = await updateTask(params.id, data);
-      if (task) {
-        navigate("/tasks");
-      }
+      navigate("/tasks");
+      console.log(task);
     }
   });
 
