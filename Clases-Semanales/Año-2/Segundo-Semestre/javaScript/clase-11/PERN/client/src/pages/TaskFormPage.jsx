@@ -1,8 +1,7 @@
 import { Card, Input, TextArea, Label, Button } from "../components/ui";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useTasks } from "../context/TasksContext.jsx";
 
 const TaskFormPage = () => {
@@ -10,31 +9,41 @@ const TaskFormPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
+  const params = useParams();
   const navigate = useNavigate();
-  const { postError, setPostError } = useState([]);
-  const { createTask } = useTasks();
-
+  const { createTask, getTask, error: tasksError } = useTasks();
   const onSubmit = handleSubmit(async (data) => {
     const response = await createTask(data);
     if (response) {
       navigate("/tasks");
-    } else {
-      setPostError(["Error al crear la tarea"]);
     }
   });
+
+  useEffect(() => {
+    if (params.id) {
+      // Lógica para obtener la tarea por ID y llenar el formulario para edición
+      getTask(params.id).then((task) => {
+        setValue("titulo", task.titulo);
+        setValue("descripcion", task.descripcion);
+      });
+    }
+  }, []);
 
   return (
     <div className="flex h-[80vh] justify-center items-center">
       <Card>
-        {postError &&
-          postError.map((error) => (
+        {tasksError &&
+          tasksError.map((error) => (
             <p key={error} className="bg-red-500 text-white p-2 mb-2">
               {error}
             </p>
           ))}
 
-        <h1 className="text-3xl font-bold my-4">Formulario de Tareas</h1>
+        <h1 className="text-3xl font-bold my-4">
+          {params.id ? "Editar Tarea" : "Crear Tarea"}
+        </h1>
         <form onSubmit={onSubmit}>
           <Label htmlFor="titulo">Titulo</Label>
           <Input

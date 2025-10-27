@@ -4,6 +4,7 @@ import {
   getTasksRequest,
   deleteTaskRequest,
   createTasksRequest,
+  getTaskRequest,
 } from "../config/tasks.api";
 
 // tengo que ver desde el video "Parte 2 -> Editar tareas"
@@ -20,11 +21,22 @@ export const useTasks = () => {
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const [errors, setError] = useState([]);
+  const [error, setError] = useState([]);
 
   const getTasks = async () => {
     const response = await getTasksRequest();
     setTasks(response.data);
+  };
+
+  const getTask = async (id, task) => {
+    try {
+      const res = await getTaskRequest(id, task);
+      return res.data;
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      }
+    }
   };
 
   const createTask = async (task) => {
@@ -47,7 +59,9 @@ export const TasksProvider = ({ children }) => {
   };
 
   return (
-    <TasksContext.Provider value={{ tasks, getTasks, deleteTask, createTask }}>
+    <TasksContext.Provider
+      value={{ tasks, getTasks, deleteTask, createTask, error, getTask }}
+    >
       {children}
     </TasksContext.Provider>
   );

@@ -11,10 +11,10 @@ export const PrivateRoutes = [
     name: "Nueva Tarea",
     path: "/tasks/new",
   },
-  {
-    name: "Editar Tarea",
-    path: "/tasks/edit/:id",
-  },
+  // {
+  //   name: "Editar Tarea",
+  //   path: "/tasks/edit/:id",
+  // },
 ];
 
 export const PublicRoutes = [

@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
   const [error, setErrors] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const signin = async (data) => {
     try {
@@ -62,16 +63,19 @@ export const AuthProvider = ({ children }) => {
 
   //Para que al recargar la pagina no se pierda la sesion
   useEffect(() => {
+    setLoading(true);
     if (Cookie.get("token")) {
       api
         .get("/profile")
         .then((res) => {
           setUser(res.data.user);
           setIsAuth(true);
+          setLoading(false);
         })
         .catch((error) => {
           setUser(null);
           setIsAuth(false);
+          setLoading(false);
           console.log(error);
         });
     }
@@ -89,6 +93,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuth,
         setErrors,
         signout,
+        loading,
       }}
     >
       {children}

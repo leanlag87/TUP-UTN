@@ -1,8 +1,10 @@
 import { Card, Button } from "../ui";
 import { useTasks } from "../../context/TasksContext";
+import { useNavigate } from "react-router-dom";
 
 export const CardTasks = ({ task }) => {
   const { deleteTask } = useTasks();
+  const navigate = useNavigate();
 
   return (
     <Card key={task.id} className="py-4 px-7">
@@ -25,7 +27,9 @@ export const CardTasks = ({ task }) => {
         >
           Eliminar
         </Button>
-        <Button>Editar</Button>
+        <Button onClick={() => navigate(`/tasks/edit/${task.id}`)}>
+          Editar
+        </Button>
       </div>
     </Card>
   );

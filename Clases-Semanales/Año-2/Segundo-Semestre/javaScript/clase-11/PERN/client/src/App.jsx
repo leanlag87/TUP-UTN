@@ -14,7 +14,10 @@ import { useAuth } from "./context/AuthContext.jsx";
 import { TasksProvider } from "./context/TasksContext.jsx";
 
 const App = () => {
-  const { isAuth } = useAuth();
+  const { isAuth, loading } = useAuth();
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
 
   return (
     <>
