@@ -79,6 +79,7 @@ export const AuthProvider = ({ children }) => {
           console.log(error);
         });
     }
+    setLoading(false); // Si no hay token, simplemente desactiva la carga
   }, []);
 
   return (
