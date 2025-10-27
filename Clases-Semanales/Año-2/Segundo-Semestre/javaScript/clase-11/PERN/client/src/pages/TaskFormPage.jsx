@@ -34,7 +34,7 @@ const TaskFormPage = () => {
         setValue("descripcion", task.descripcion);
       });
     }
-  }, []);
+  }, [params.id, getTask, setValue]);
 
   return (
     <div className="flex h-[80vh] justify-center items-center">
