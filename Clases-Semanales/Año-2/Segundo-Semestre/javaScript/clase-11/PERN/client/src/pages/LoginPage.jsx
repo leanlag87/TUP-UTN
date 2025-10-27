@@ -4,22 +4,26 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm();
-  const { signin, error } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { signin, error: loginError } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     const user = await signin(data);
     if (user) {
-      navigate("/");
+      navigate("/tasks");
     }
   });
 
   return (
     <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
       <Card>
-        {error &&
-          error.map((error) => {
+        {loginError &&
+          loginError.map((error) => {
             <p className="bg-red-500 text-white p-2 mb-2 rounded">{error}</p>;
           })}
 
@@ -32,18 +36,26 @@ const LoginPage = () => {
             placeholder="Ingrese su correo"
             {...register("email", { required: true })}
           />
+          {errors.email && (
+            <span className="text-red-500">Este campo es requerido</span>
+          )}
+
           <Label htmlFor="password">Contraseña</Label>
           <Input
             type="password"
             placeholder="Ingrese su contraseña"
             {...register("password", { required: true })}
           />
+          {errors.password && (
+            <span className="text-red-500">Este campo es requerido</span>
+          )}
+
           <Button type="submit" className="mt-4 text-center">
             Ingresar
           </Button>
         </form>
         <div className="flex justify-between items-center my-4">
-          <p>¿No tienes una cuenta? </p>
+          <p className="mr-4">¿No tienes una cuenta? </p>
           <Link
             to="/register"
             className="text-sm text-blue-500 hover:no-underline"
