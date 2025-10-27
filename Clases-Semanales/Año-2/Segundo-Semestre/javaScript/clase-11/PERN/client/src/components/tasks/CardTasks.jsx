@@ -1,7 +1,9 @@
 import { Card, Button } from "../ui";
-import { deleteTasksRequest } from "../../config/tasks.api";
+import { useTasks } from "../../context/TasksContext";
 
 export const CardTasks = ({ task }) => {
+  const { deleteTask } = useTasks();
+
   return (
     <Card key={task.id} className="py-4 px-7">
       <div>
@@ -17,7 +19,7 @@ export const CardTasks = ({ task }) => {
               window.confirm("¿Estás seguro de que deseas eliminar esta tarea?")
             ) {
               // Lógica para eliminar la tarea
-              await deleteTasksRequest(task.id);
+              await deleteTask(task.id);
             }
           }}
         >

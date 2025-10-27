@@ -1,8 +1,9 @@
 import { Card, Input, TextArea, Label, Button } from "../components/ui";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { createTasksRequest } from "../config/tasks.api";
+
 import { useState } from "react";
+import { useTasks } from "../context/TasksContext.jsx";
 
 const TaskFormPage = () => {
   const {
@@ -12,14 +13,14 @@ const TaskFormPage = () => {
   } = useForm();
   const navigate = useNavigate();
   const { postError, setPostError } = useState([]);
+  const { createTask } = useTasks();
 
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      const res = await createTasksRequest(data);
-      console.log(res);
+    const response = await createTask(data);
+    if (response) {
       navigate("/tasks");
-    } catch (error) {
-      setPostError([error.response.data.message]);
+    } else {
+      setPostError(["Error al crear la tarea"]);
     }
   });
 

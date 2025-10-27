@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { getTasksRequest } from "../config/tasks.api";
+import { useEffect } from "react";
 import { CardTasks } from "../components/tasks/CardTasks";
+import { useTasks } from "../context/TasksContext";
 
 export const TasksPage = () => {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, getTasks } = useTasks();
 
   useEffect(() => {
-    getTasksRequest().then((response) => {
-      setTasks(response.data);
-    });
+    getTasks();
   }, []);
 
   return (

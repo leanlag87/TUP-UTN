@@ -1,0 +1,54 @@
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useContext } from "react";
+import {
+  getTasksRequest,
+  deleteTaskRequest,
+  createTasksRequest,
+} from "../config/tasks.api";
+
+// tengo que ver desde el video "Parte 2 -> Editar tareas"
+
+const TasksContext = createContext();
+
+export const useTasks = () => {
+  const context = useContext(TasksContext);
+  if (!context) {
+    throw new Error("useTasks must be used within a TasksProvider");
+  }
+  return context;
+};
+
+export const TasksProvider = ({ children }) => {
+  const [tasks, setTasks] = useState([]);
+  const [errors, setError] = useState([]);
+
+  const getTasks = async () => {
+    const response = await getTasksRequest();
+    setTasks(response.data);
+  };
+
+  const createTask = async (task) => {
+    try {
+      const res = await createTasksRequest(task);
+      setTasks([...tasks, res.data]);
+      return res;
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
+  const deleteTask = async (id) => {
+    const response = await deleteTaskRequest(id);
+    if (response.status === 204) {
+      setTasks(tasks.filter((task) => task.id !== id));
+    }
+  };
+
+  return (
+    <TasksContext.Provider value={{ tasks, getTasks, deleteTask, createTask }}>
+      {children}
+    </TasksContext.Provider>
+  );
+};

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -11,6 +11,7 @@ import Navbar from "./components/navbar/Navbar.jsx";
 import { Container } from "./components/ui/Container.jsx";
 import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
+import { TasksProvider } from "./context/TasksContext.jsx";
 
 const App = () => {
   const { isAuth } = useAuth();
@@ -39,9 +40,22 @@ const App = () => {
             element={<ProtectedRoute isAllowed={isAuth} redirectTo="/login" />}
           >
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/tasks" element={<TasksPage />} />
-            <Route path="/tasks/new" element={<TaskFormPage />} />
-            <Route path="/tasks/edit/:id" element={<TaskFormPage />} />
+
+            {/*Rutas de tareas protegidas dentro del TasksProvider
+            Proporciona el contexto de tareas a todos los componentes hijos
+            solo se accede a estas rutas si el usuario está autenticado*/}
+
+            <Route
+              element={
+                <TasksProvider>
+                  <Outlet />
+                </TasksProvider>
+              }
+            >
+              <Route path="/tasks" element={<TasksPage />} />
+              <Route path="/tasks/new" element={<TaskFormPage />} />
+              <Route path="/tasks/edit/:id" element={<TaskFormPage />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
