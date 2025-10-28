@@ -2,7 +2,7 @@
 import { createContext, useState, useContext } from "react";
 import {
   getTasksRequest,
-  deleteTaskRequest,
+  deleteTasksRequest,
   createTasksRequest,
   getTaskRequest,
   updateTaskRequest,
@@ -22,9 +22,20 @@ export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState([]);
 
+  // const getTasks = async () => {
+  //   const response = await getTasksRequest();
+  //   setTasks(response.data);
+  // };
+
   const getTasks = async () => {
-    const response = await getTasksRequest();
-    setTasks(response.data);
+    try {
+      const response = await getTasksRequest();
+      setTasks(response.data);
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      }
+    }
   };
 
   const getTask = async (id, task) => {
@@ -50,10 +61,23 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  // const deleteTask = async (id) => {
+  //   const response = await deleteTasksRequest(id);
+  //   if (response.status === 204) {
+  //     setTasks(tasks.filter((task) => task.id !== id));
+  //   }
+  // };
+
   const deleteTask = async (id) => {
-    const response = await deleteTaskRequest(id);
-    if (response.status === 204) {
-      setTasks(tasks.filter((task) => task.id !== id));
+    try {
+      const response = await deleteTasksRequest(id);
+      if (response.status === 204) {
+        setTasks(tasks.filter((task) => task.id !== id));
+      }
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      }
     }
   };
 

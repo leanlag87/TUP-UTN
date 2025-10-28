@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import { CardTasks } from "../components/tasks/CardTasks";
 import { useTasks } from "../context/TasksContext";
+import { useAuth } from "../context/AuthContext";
 
 export const TasksPage = () => {
   const { tasks, getTasks } = useTasks();
+  const { isAuth } = useAuth();
+
+  // useEffect(() => {
+  //   getTasks();
+  // }, []);
 
   useEffect(() => {
-    getTasks();
-  }, [getTasks]);
+    if (isAuth) {
+      getTasks();
+    }
+  }, [isAuth]);
 
   if (tasks.length === 0) {
     return (

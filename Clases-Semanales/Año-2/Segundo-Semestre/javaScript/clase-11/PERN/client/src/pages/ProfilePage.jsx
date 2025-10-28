@@ -3,7 +3,11 @@ import { useAuth } from "../context/AuthContext";
 const ProfilePage = () => {
   const { user } = useAuth();
 
-  return <div>ProfilePage {user?.name}</div>;
+  return (
+    <div>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
+    </div>
+  );
 };
 
 export default ProfilePage;

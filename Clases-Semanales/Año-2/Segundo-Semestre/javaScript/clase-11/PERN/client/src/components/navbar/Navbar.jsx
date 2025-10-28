@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./navigation";
 import { Container } from "../ui";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../context/AuthContext";
 import { twMerge } from "tailwind-merge";
 
 const Navbar = () => {
   const location = useLocation();
-  const { isAuth, signout } = useAuth();
+  const { isAuth, signout, user } = useAuth();
   return (
     <nav className="bg-zinc-950">
       <Container className="flex justify-between items-center py-3">
@@ -32,6 +32,14 @@ const Navbar = () => {
                 className="text-slate-200 cursor-pointer items-center flex px-3 px-1 hover:cursor-pointer rounded-md hover:bg-red-600"
               >
                 Cerrar Sesión
+              </li>
+              <li className="text-slate-300 items-center flex px-3 py-1 rounded-md">
+                <span>{user?.name}</span>
+                <img
+                  src={user.gravatar}
+                  alt={user?.name}
+                  className="w-8 h-8 rounded-full ml-2"
+                />
               </li>
             </>
           ) : (

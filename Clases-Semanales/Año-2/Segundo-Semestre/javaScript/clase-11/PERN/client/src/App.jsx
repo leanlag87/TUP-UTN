@@ -4,7 +4,7 @@ import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
-import TasksPage from "./pages/TasksPage.jsx";
+import { TasksPage } from "./pages/TasksPage.jsx";
 import TaskFormPage from "./pages/TaskFormPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
