@@ -1,20 +1,23 @@
+import { MdTaskAlt, MdAdd, MdVerifiedUser } from "react-icons/md";
+import { BiTask, BiUser } from "react-icons/bi";
+
 export const PrivateRoutes = [
   {
     name: "Perfil",
     path: "/profile",
+    icon: <BiUser />,
   },
+
   {
     name: "Tareas",
     path: "/tasks",
+    icon: <BiTask />,
   },
   {
-    name: "Nueva Tarea",
+    name: "Agregar",
     path: "/tasks/new",
+    icon: <MdAdd />,
   },
-  // {
-  //   name: "Editar Tarea",
-  //   path: "/tasks/edit/:id",
-  // },
 ];
 
 export const PublicRoutes = [
