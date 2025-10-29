@@ -7,15 +7,11 @@ export const TasksPage = () => {
   const { tasks, getTasks } = useTasks();
   const { isAuth } = useAuth();
 
-  // useEffect(() => {
-  //   getTasks();
-  // }, []);
-
   useEffect(() => {
     if (isAuth) {
       getTasks();
     }
-  }, [isAuth]);
+  }, [isAuth, getTasks]);
 
   if (tasks.length === 0) {
     return (

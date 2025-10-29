@@ -1,4 +1,4 @@
-import { MdTaskAlt, MdAdd, MdVerifiedUser } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 import { BiTask, BiUser } from "react-icons/bi";
 
 export const PrivateRoutes = [

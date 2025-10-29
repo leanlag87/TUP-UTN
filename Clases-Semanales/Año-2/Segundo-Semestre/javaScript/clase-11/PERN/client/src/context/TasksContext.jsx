@@ -61,23 +61,10 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  // const deleteTask = async (id) => {
-  //   const response = await deleteTasksRequest(id);
-  //   if (response.status === 204) {
-  //     setTasks(tasks.filter((task) => task.id !== id));
-  //   }
-  // };
-
   const deleteTask = async (id) => {
-    try {
-      const response = await deleteTasksRequest(id);
-      if (response.status === 204) {
-        setTasks(tasks.filter((task) => task.id !== id));
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.message);
-      }
+    const response = await deleteTasksRequest(id);
+    if (response.status === 204) {
+      setTasks(tasks.filter((task) => task.id !== id));
     }
   };
 

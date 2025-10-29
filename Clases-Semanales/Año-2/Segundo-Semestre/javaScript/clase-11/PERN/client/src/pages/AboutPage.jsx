@@ -15,7 +15,22 @@ const AboutPage = () => {
       </h3>
       <h2 className="py-4 px-2 text-2xl">Configuracion del proyecto</h2>
       <h3 className="py-4 px-2">
-        Este proyecto esta configurado con las siguientes tecnologias:
+        Antes de comenzar, debemos configurar nuestro proyecto. Asegúrate de
+        tener PostgreSQL instalado y configurado con una base de datos. Luego,
+        sigue estos pasos: Configura el Servidor Express.js: Crea un servidor
+        Express para manejar las solicitudes de la API. Implementa las rutas
+        para la autenticación de usuarios y las operaciones CRUD de tareas.
+        Configura la Base de Datos: Conecta tu servidor a la base de datos
+        PostgreSQL. Crea tablas para usuarios y tareas. Define los modelos
+        correspondientes en tu servidor. Desarrolla el Frontend React: Construye
+        la interfaz de usuario utilizando React. Crea componentes para mostrar
+        la lista de tareas, el formulario de inicio de sesión y el formulario de
+        registro. Implementa la Autenticación de Usuarios: Utiliza JWT para
+        manejar la autenticación de usuarios. Los usuarios pueden registrarse,
+        iniciar sesión y cerrar sesión de manera segura. Operaciones CRUD de
+        Tareas: Crea las rutas y controladores para realizar operaciones CRUD en
+        las tareas. Esto incluye crear una nueva tarea, leer la lista de tareas,
+        actualizar una tarea y eliminar una tarea.
       </h3>
       <h2 className="py-4 px-2 text-2xl">Frontend</h2>
       <h3 className="py-4 px-2">

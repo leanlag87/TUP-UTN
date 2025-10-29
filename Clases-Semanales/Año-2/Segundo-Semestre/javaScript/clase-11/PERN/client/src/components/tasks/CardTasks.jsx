@@ -19,10 +19,7 @@ export const CardTasks = ({ task }) => {
         <Button
           className="bg-red-500 hover:bg-red-600"
           onClick={async () => {
-            if (
-              window.confirm("¿Estás seguro de que deseas eliminar esta tarea?")
-            ) {
-              // Lógica para eliminar la tarea
+            if (confirm("¿Estás seguro de que deseas eliminar esta tarea?")) {
               await deleteTask(task.id);
             }
           }}
@@ -30,7 +27,7 @@ export const CardTasks = ({ task }) => {
           <FaTrashRestore className="inline-block mr-1 text-white" />
           Eliminar
         </Button>
-        <Button onClick={() => navigate(`/tasks/edit/${task.id}`)}>
+        <Button onClick={() => navigate(`/tasks/${task.id}/edit`)}>
           <PiPencilSimpleBold className="inline-block mr-1 text-white" />
           Editar
         </Button>
