@@ -35,7 +35,8 @@ const Navbar = () => {
                 onClick={() => signout()}
                 className="text-slate-200 cursor-pointer items-center flex px-3 hover:cursor-pointer rounded-md hover:bg-red-600"
               >
-                Cerrar Sesión
+                <span className="hidden sm:block">Cerrar Sesión</span>
+                <BiLogOut className="inline ml-1 mb-1" />
               </li>
               <li className="text-slate-300 items-center flex px-3 py-1 rounded-md">
                 <img
