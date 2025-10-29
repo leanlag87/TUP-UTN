@@ -1,16 +1,19 @@
 //Aqui va estar el codigo de la base de datos
-
 import pg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
+import {
+  PG_USER,
+  PG_HOST,
+  PG_DATABASE,
+  PG_PASSWORD,
+  PG_PORT,
+} from "./config.js";
 
 export const pool = new pg.Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  user: PG_USER,
+  host: PG_HOST,
+  database: PG_DATABASE,
+  password: PG_PASSWORD,
+  port: PG_PORT,
 });
 
 pool.on("connect", () => {

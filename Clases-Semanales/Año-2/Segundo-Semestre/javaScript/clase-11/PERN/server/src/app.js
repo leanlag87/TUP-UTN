@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import tasksRoutes from "./router/tasks.routes.js";
 import authRoutes from "./router/auth.routes.js";
 import cors from "cors";
+import { pool } from "./db.js";
+import { FRONTEND_URL } from "./config.js";
 
 // Exportamos e instanciamos la app de express
 const app = express();
@@ -15,8 +17,8 @@ app.use(morgan("dev"));
 //en este caso solo le damos permiso a nuestro front
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, //la URL del frontend
-    credentials: true, //permitir cookies
+    origin: FRONTEND_URL,
+    credentials: true,
   })
 );
 
@@ -30,6 +32,10 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) =>
   res.json({ message: "Bienvenidos a nuestro proyecto" })
 );
+app.get("/api/ping", async (req, res) => {
+  const result = await pool.query("SELECT NOW()");
+  res.json(result.rows[0]);
+});
 app.use("/api", tasksRoutes);
 app.use("/api", authRoutes);
 
