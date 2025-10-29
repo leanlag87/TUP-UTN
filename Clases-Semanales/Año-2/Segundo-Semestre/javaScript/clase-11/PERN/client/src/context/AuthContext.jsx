@@ -3,6 +3,8 @@ import { createContext, useState, useContext, useEffect } from "react";
 import api from "../config/api";
 import Cookie from "js-cookie";
 
+//Me quede en el video 9.4 Experiencia de usuario Parte -> 2
+
 export const AuthContext = createContext();
 
 // Hook personalizado para usar el contexto
@@ -62,24 +64,52 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Para que al recargar la pagina no se pierda la sesion
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (Cookie.get("token")) {
+  //     api
+  //       .get("/profile")
+  //       .then((res) => {
+  //         setUser(res.data.user);
+  //         setIsAuth(true);
+  //         setLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         setUser(null);
+  //         setIsAuth(false);
+  //         setLoading(false);
+  //         console.log(error);
+  //       });
+  //   }
+  //   setLoading(false); // Si no hay token, simplemente desactiva la carga
+  // }, []);
+
   useEffect(() => {
-    setLoading(true);
-    if (Cookie.get("token")) {
-      api
-        .get("/profile")
-        .then((res) => {
-          setUser(res.data.user);
-          setIsAuth(true);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setUser(null);
-          setIsAuth(false);
-          setLoading(false);
-          console.log(error);
-        });
-    }
-    setLoading(false); // Si no hay token, simplemente desactiva la carga
+    const checkAuth = async () => {
+      const token = Cookie.get("token");
+
+      if (!token) {
+        setUser(null);
+        setIsAuth(false);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await api.get("/profile");
+        setUser(res.data.user);
+        setIsAuth(true);
+      } catch (error) {
+        setUser(null);
+        setIsAuth(false);
+        Cookie.remove("token");
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
   return (

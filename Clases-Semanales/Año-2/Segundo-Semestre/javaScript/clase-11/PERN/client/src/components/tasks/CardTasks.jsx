@@ -11,8 +11,8 @@ export const CardTasks = ({ task }) => {
   return (
     <Card key={task.id} className="py-4 px-7 justify-center flex flex-col ">
       <div>
-        <h1 className="text-2xl font-bold">{task.titulo}</h1>
-        <p className="py-4">{task.descripcion}</p>
+        <h1 className="text-2xl font-bold">{task.title}</h1>
+        <p className="py-4">{task.description}</p>
       </div>
 
       <div className="flex gap-x-2 justify-end">

@@ -30,8 +30,8 @@ const TaskFormPage = () => {
     if (params.id) {
       // Lógica para obtener la tarea por ID y llenar el formulario para edición
       getTask(params.id).then((task) => {
-        setValue("titulo", task.titulo);
-        setValue("descripcion", task.descripcion);
+        setValue("title", task.title);
+        setValue("description", task.description);
       });
     }
   }, []);
@@ -55,9 +55,9 @@ const TaskFormPage = () => {
             type="text"
             placeholder="Titulo"
             autoFocus
-            {...register("titulo", { required: true })}
+            {...register("title", { required: true })}
           />
-          {errors.titulo && (
+          {errors.title && (
             <span className="text-red-500">El titulo es requerido</span>
           )}
 
@@ -65,7 +65,7 @@ const TaskFormPage = () => {
           <TextArea
             placeholder="Descripción"
             rows={3}
-            {...register("descripcion")}
+            {...register("description")}
           />
 
           <Button type="submit">Guardar</Button>
